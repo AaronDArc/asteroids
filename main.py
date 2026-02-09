@@ -19,8 +19,15 @@ def main():
     dt = 0
     x = SCREEN_WIDTH/2
     y = SCREEN_HEIGHT/2
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+    Player.containers = (updatable,drawable)
     Jerry = Player(x,y,PLAYER_RADIUS)
+    updatable.add(Jerry)
+    drawable.add(Jerry)
     
+    
+
 
     while True:
         log_state()
@@ -32,9 +39,13 @@ def main():
         screen.fill("black")
         dt = Clock.tick(60)
         dt= dt/1000
-        Jerry.update(dt)
-        Jerry.move(dt)
-        Jerry.draw(screen)
+        for thing in updatable:
+            thing.update(dt)
+            thing.move(dt)
+        for thing in drawable:
+            thing.draw(screen)
+
+        
         pygame.display.flip()
         
         
