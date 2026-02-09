@@ -1,5 +1,5 @@
 import pygame
-from constants import SCREEN_WIDTH, SCREEN_HEIGHT, PLAYER_RADIUS, LINE_WIDTH
+from constants import *
 from logger import log_state
 from player import Player
 from circleshape import CircleShape
@@ -30,10 +30,13 @@ def main():
             pass
 
         screen.fill("black")
-        Jerry.draw(screen)
-        pygame.display.flip()
         dt = Clock.tick(60)
         dt= dt/1000
+        Jerry.update(dt)
+        Jerry.move(dt)
+        Jerry.draw(screen)
+        pygame.display.flip()
+        
         
 
         
