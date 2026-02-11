@@ -6,6 +6,7 @@ from circleshape import CircleShape
 from asteroids import Asteroid
 from asteroidfield import AsteroidField
 from logger import log_event
+from shot import Shot
 
 
 
@@ -27,12 +28,13 @@ def main():
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
-    
+    shots = pygame.sprite.Group()
 
 
     Player.containers = (updatable,drawable) # This basically just says all future instances of the player group will go to the updatable group and the drawable group via inheritance
     Asteroid.containers = (asteroids,updatable,drawable)
     AsteroidField.containers = (updatable)
+    Shot.containers = (shots,updatable,drawable)
 
 
     jerry = Player(x,y,LINE_WIDTH)
@@ -60,7 +62,7 @@ def main():
 
 
         for thing in drawable:
-            if thing != jerry and jerry.collideswith(thing):
+            if thing in asteroids and thing.collideswith(jerry):
                 log_state()
                 print("Player Hit!!!")
                 return
