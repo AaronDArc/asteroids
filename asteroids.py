@@ -2,13 +2,18 @@ from circleshape import CircleShape
 import pygame
 from constants import LINE_WIDTH
 
-def Asteroid(CircleShape):
-    def __init__(self,x,y,radius):
-        super().__init__()
 
-    def draw(self,screen,color):
-        pygame.draw.circle(screen,self.position(),"white",self.radius(),LINE_WIDTH)
+class Asteroid(CircleShape):
+    def __init__(self,x,y,radius):
+        super().__init__(x,y,radius)
+
+    def draw(self,screen,color="white"):
+        pygame.draw.circle(screen,color,(self.position.x,self.position.y),self.radius,LINE_WIDTH)
+
+        
 
     def update(self,dt):
-        self.position += self.velocity()*dt
+        self.position += self.velocity*dt
+        #self.y += self.velocity.y*dt
+
 

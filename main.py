@@ -3,6 +3,8 @@ from constants import *
 from logger import log_state
 from player import Player
 from circleshape import CircleShape
+from asteroids import Asteroid
+from asteroidfield import AsteroidField
 
 
 
@@ -19,12 +21,24 @@ def main():
     dt = 0
     x = SCREEN_WIDTH/2
     y = SCREEN_HEIGHT/2
+    
+
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
-    Player.containers = (updatable,drawable)
-    Jerry = Player(x,y,PLAYER_RADIUS)
-    updatable.add(Jerry)
-    drawable.add(Jerry)
+    asteroids = pygame.sprite.Group()
+    
+
+
+    Player.containers = (updatable,drawable) # This basically just says all future instances of the player group will go to the updatable group and the drawable group via inheritance
+    Asteroid.containers = (asteroids,updatable,drawable)
+    AsteroidField.containers = (updatable)
+    #aster = Asteroid(x,y,ASTEROID_MAX_RADIUS)
+
+
+    jerry = Player(x,y,LINE_WIDTH)
+    asteroid_field = AsteroidField()
+
+    print(updatable)
     
     
 
@@ -41,7 +55,6 @@ def main():
         dt= dt/1000
         for thing in updatable:
             thing.update(dt)
-            thing.move(dt)
         for thing in drawable:
             thing.draw(screen)
 
