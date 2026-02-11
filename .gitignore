@@ -4,3 +4,5 @@ index.html
 game_state.jsonl
 .venv
 .venv/
+git_events.jsonl
+game_events.jsonl

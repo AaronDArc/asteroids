@@ -66,6 +66,12 @@ def main():
                 log_state()
                 print("Player Hit!!!")
                 return
+            for shot in shots:
+                for asteroid in asteroids:
+                    if shot.collideswith(asteroid):
+                        shot.kill()
+                        asteroid.split()
+
             thing.draw(screen)
             pass
 
